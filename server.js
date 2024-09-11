@@ -62,10 +62,11 @@ app.post("/api/sessions", async (req, res) => {
     
     // Ideally the data passed here should be computed based on business logic
     const response = await checkout.PaymentsApi.sessions({
-      countryCode: "NL",
+      countryCode: "GB",
       amount: { currency: "GBP", value: 10000 }, // value is 100€ in minor units
       reference: orderRef, // required
       merchantAccount: process.env.ADYEN_MERCHANT_ACCOUNT, // required
+      store: process.env.STORE_CODE,
       returnUrl: `${determineHostUrl(req)}/redirect?orderRef=${orderRef}`, // required for 3ds2 redirect flow
       // set lineItems required for some payment methods (ie Klarna)
       lineItems: [
