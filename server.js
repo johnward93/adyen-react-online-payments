@@ -63,7 +63,7 @@ app.post("/api/sessions", async (req, res) => {
     // Ideally the data passed here should be computed based on business logic
     const response = await checkout.PaymentsApi.sessions({
       countryCode: "NL",
-      amount: { currency: "EUR", value: 10000 }, // value is 100€ in minor units
+      amount: { currency: "GBP", value: 10000 }, // value is 100€ in minor units
       reference: orderRef, // required
       merchantAccount: process.env.ADYEN_MERCHANT_ACCOUNT, // required
       returnUrl: `${determineHostUrl(req)}/redirect?orderRef=${orderRef}`, // required for 3ds2 redirect flow
@@ -77,7 +77,7 @@ app.post("/api/sessions", async (req, res) => {
     // save transaction in memory
     // enable webhook to confirm the payment (change status to Authorized)
     paymentStore[orderRef] = {
-      amount: { currency: "EUR", value: 1000 },
+      amount: { currency: "GBP", value: 1000 },
       paymentRef: orderRef,
       status: "Pending"
     };
